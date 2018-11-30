@@ -9,7 +9,7 @@ server:
   port: 8070
   context-path: /
 logging:
-  file: manage.log
+  file: hydroppower.log
 shiro:
   loginUrl: /login.html
 

@@ -39,7 +39,12 @@ public class UserService {
 
     public ApiResponse<Integer> addNewOrUpdateUser(UserAddOrUpdateRequest userAddOrUpdateRequest){
         UserPo userPo = new UserPo();
-        BeanUtils.copyProperties(userAddOrUpdateRequest,userPo);
+        BeanUtils.copyProperties(userAddOrUpdateRequest,userPo,"password");
+        //盐值的MD5加密,加密二次
+        String encryptedPassword = MD5Util.md5(MD5Util.md5(userAddOrUpdateRequest.getPassword()) + saltEncrypt);
+        userPo.setPassword(encryptedPassword);
+        //todo 动态权限
+        userPo.setRoleId(1);
         userPo.setCreateTime(System.currentTimeMillis());
         userPo.setLastUpdateTime(System.currentTimeMillis());
         this.userMapper.insert(userPo);
