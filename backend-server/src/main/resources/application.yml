@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: ${env}
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+server:
+  port: 8070
+  context-path: /
+logging:
+  file: manage.log
+shiro:
+  loginUrl: /login.html
+
+mybatis.configuration.cache-enabled: false
+
+#自定义参数
+saltEncrypt: 123
+serverConfigHost:
+skipRemoteHost: dev
+env: dev

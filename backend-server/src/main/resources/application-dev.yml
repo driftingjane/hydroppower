@@ -1,0 +1,11 @@
+# 开发环境配置
+
+#服务器配置
+server:
+  port: 8070
+# 打印sql
+logging:
+  level:
+    com.huanke.iot.base.dao : debug
+swaggerUrl:
+  driftingjane.s1.natapp.cc

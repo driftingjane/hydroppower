@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mountainside.hydroppower.base.dao.user.UserMapper">
+    <sql id="tableName">
+        t_user
+    </sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.mountainside.hydroppower.base.po.user.UserPo">
+        INSERT INTO
+        <include refid="tableName"/>
+        (
+        id,
+        phone,
+        loginName,
+        realName,
+        password,
+        roleId,
+        createTime,
+        lastUpdateTime
+        )
+        VALUES
+        (
+        #{id},
+        #{phone},
+        #{loginName},
+        #{realName},
+        #{password},
+        #{roleId},
+        #{createTime},
+        #{lastUpdateTime}
+        )
+    </insert>
+
+    <select id="selectByNameOrPhone" parameterType="java.lang.String" resultType="com.mountainside.hydroppower.base.po.user.UserPo">
+        SELECT * FROM
+        <include refid="tableName"/>
+        WHERE 1 = 1
+        AND (phone = #{loginName} OR loginName = #{loginName})
+    </select>
+</mapper>

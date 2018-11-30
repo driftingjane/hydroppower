@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mountainside.hydroppower.base.po.user.PermissionPo">
+    <sql id="role_table">
+        t_role
+    </sql>
+    <sql id="permission_table">
+        t_permission
+    </sql>
+    <sql id="role_permission_table">
+        t_role_permission
+    </sql>
+    <sql id="user_table">
+        t_user
+    </sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.mountainside.hydroppower.base.po.user.PermissionPo">
+        INSERT INTO
+        <include refid="permission_table"/>
+        (
+        id,
+        authKey,
+        action,
+        authName,
+        parent
+        )
+        VALUES
+        (
+        #{id},
+        #{authKey},
+        #{action},
+        #{authName},
+        #{parent}
+        )
+    </insert>
+
+    <select id="getPermissionsByRoleId" resultType="com.mountainside.hydroppower.base.po.user.PermissionPo">
+        select * from
+        <include refid="permission_table"/>
+        where id in
+        (select permissionId from
+        <include refid="role_permission_table"/>
+        where roleId=#{roleId})
+    </select>
+</mapper>
