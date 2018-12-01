@@ -31,6 +31,38 @@
         )
     </insert>
 
+    <update id="updateById" parameterType="com.mountainside.hydroppower.base.po.user.UserPo">
+        UPDATE
+        <include refid="tableName"/>
+        <set>
+            <if test="realName != null and realName != ''">
+                AND realName = #{realName}
+            </if>
+            <if test="password != null and password != ''">
+                AND password = #{password}
+            </if>
+            <if test="roleId != null">
+                AND roleId = #{roleId}
+            </if>
+            <if test="lastUpdateTime != null">
+                AND lastUpdateTime = #{lastUpdateTime}
+            </if>
+        </set>
+        WHERE
+        1= 1
+        AND id = #{id}
+    </update>
+
+    <select id="selectList" resultType="com.mountainside.hydroppower.base.po.user.UserPo">
+        SELECT * FROM
+        <include refid="tableName"/>
+        WHERE 1 = 1
+        <if test="param.realName != null and param.realName != ''">
+            AND reanName = #{param.realName}
+        </if>
+    </select>
+
+
     <select id="selectByNameOrPhone" parameterType="java.lang.String" resultType="com.mountainside.hydroppower.base.po.user.UserPo">
         SELECT * FROM
         <include refid="tableName"/>

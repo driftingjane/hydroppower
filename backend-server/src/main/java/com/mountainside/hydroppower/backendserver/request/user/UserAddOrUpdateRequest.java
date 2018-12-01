@@ -9,6 +9,7 @@ import lombok.Data;
  */
 @Data
 public class UserAddOrUpdateRequest {
+    private Integer id;
     private String phone;
     private String loginName;
     private String realName;

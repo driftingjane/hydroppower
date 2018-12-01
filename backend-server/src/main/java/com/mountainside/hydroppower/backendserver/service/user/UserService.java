@@ -43,6 +43,11 @@ public class UserService {
         //盐值的MD5加密,加密二次
         String encryptedPassword = MD5Util.md5(MD5Util.md5(userAddOrUpdateRequest.getPassword()) + saltEncrypt);
         userPo.setPassword(encryptedPassword);
+        //如果ID不为空则为更新
+        if(null != userPo.getId()){
+            userPo.setCreateTime(System.currentTimeMillis());
+
+        }
         //todo 动态权限
         userPo.setRoleId(1);
         userPo.setCreateTime(System.currentTimeMillis());

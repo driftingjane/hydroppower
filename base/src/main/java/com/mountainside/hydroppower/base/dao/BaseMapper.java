@@ -1,5 +1,9 @@
 package com.mountainside.hydroppower.base.dao;
 
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 /**
  * @Author : sxj
  * @Date : 2018/11/24 10:07
@@ -7,4 +11,5 @@ package com.mountainside.hydroppower.base.dao;
  */
 public interface BaseMapper<T> {
     Integer insert(T bean);
+    List<T> selectList(@Param("param") T queryBean);
 }
